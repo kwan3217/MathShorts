@@ -9,3 +9,4 @@ venv/
 /media/
 /render/
 *.mp4
+/.idea/
