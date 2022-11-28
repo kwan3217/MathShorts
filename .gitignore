@@ -10,3 +10,7 @@ venv/
 /render/
 *.mp4
 /.idea/
+
+# kdenlive backups
+*_backup*.kdenlive
+
