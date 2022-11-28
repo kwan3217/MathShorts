@@ -23,7 +23,6 @@ frame_safe_xc=(frame_safe_x0+frame_safe_x1)/2
 frame_safe_yc=(frame_safe_y0+frame_safe_y1)/2
 
 
-
 class Quadratic1(Scene):
     def construct(self):
         GraphPoint=Point([frame_safe_x0,6,0])
@@ -126,6 +125,51 @@ requires a trick.""", t2s={" t.": ITALIC}, font_size=72, font='TeX Gyre Adventor
         self.wait()
         self.play(FadeOut(Text10),FadeOut(tlabel),FadeOut(tnumber),FadeOut(ylabel),FadeOut(ynumber),FadeOut(graph),FadeOut(ax),FadeOut(dot),FadeOut(Math1))
 
+
+
+class Quadratic2(Scene):
+    def construct(self):
+        TextPoint=Point([frame_safe_x0,6,0])
+        MathPoint=Point([frame_safe_x0+1,4,0])
+        if True:
+            # Draw the rectangle around the safe area
+            self.add(Polygon([frame_safe_x0,frame_safe_y0,0],
+                             [frame_safe_x1, frame_safe_y0, 0],
+                             [frame_safe_x1, frame_safe_y1, 0],
+                             [frame_safe_x0, frame_safe_y1, 0],color='#ff00ff'
+                             ))
+        Title=Text("Completing the square",font_size=72,font='TeX Gyre Adventor',color=BLACK).move_to([frame_safe_xc,frame_safe_y1-0.5,0])
+        self.add(Title)
+
+        Text1=Text(r"""Last time we had an
+equation like this:""",font_size=72,font='TeX Gyre Adventor',color=BLACK).next_to(TextPoint,UP+RIGHT)
+        Math1=MathTex(r'{{ y(t) = y_0 +  v_0 t }} {{-}} {{\frac{1}{2}gt^2}}',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        self.play(FadeIn(Text1),FadeIn(Math1))
+        self.pause()
+        Text2=Text(r"""Let's get everything
+on one side:""",font_size=72,font='TeX Gyre Adventor',color=BLACK).next_to(TextPoint,UP+RIGHT)
+        Math2a=MathTex(r'{{\frac{1}{2}gt^2}} {{+}} {{y(t) =  y_0    +    v_0 t }} ',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        Math2b=MathTex(r'{{\frac{1}{2}gt^2}} {{+     y(t) =  y_0}}{{+}}{{v_0 t}} ',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        self.play(FadeOut(Text1),FadeIn(Text2),TransformMatchingTex(Math1,Math2a))
+        self.remove(Math2a)
+        self.add(Math2b)
+        Math3a=MathTex(r'{{\frac{1}{2}gt^2}} {{-}} {{v_0 t}}{{ + y(t) =    y_0}}   ',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        Math3b=MathTex(r'{{\frac{1}{2}gt^2     -     v_0 t     + y(t)}} {{ = }}{{y_0}}   ',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        self.play(TransformMatchingTex(Math2b,Math3a))
+        self.remove(Math3a)
+        self.add(Math3b)
+        Math4a=MathTex(r'{{\frac{1}{2}gt^2     -     v_0 t     + y(t)}}{{-}}{{y_0}}{{=}}{{0}}   ',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        Math4b=MathTex(r'{{\frac{1}{2}g}}{{t^2     }}{{-v_0}}{{t+}}{y(t)-y_0}}{{=0}}   ',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        self.play(TransformMatchingTex(Math3b,Math4a))
+        self.remove(Math4a)
+        self.add(Math4b)
+        self.pause(2)
+        Text3=Text(r"""And rename
+the variables:""",font_size=72,font='TeX Gyre Adventor',color=BLACK).next_to(TextPoint,UP+RIGHT)
+        Math5a=MathTex(r'{{a}}{{t^2     }}{{+b}}t + {{c}}{{=0}}   ',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        Math5b=MathTex(r'{{a}}{{t}}^2  +b{{t}} + c=0   ',color=BLACK).scale(1.8).next_to(MathPoint,RIGHT)
+        self.play(FadeOut(Text2),FadeIn(Text3),TransformMatchingTex(Math4b,Math5a))
+        self.pause()
 
 
 def main():
